@@ -1,0 +1,11 @@
+cc_library(
+    name = "best_line",
+    srcs = ["best_line.cpp"],
+    hdrs = ["best_line.h"],
+)
+
+cc_test(
+    name = "best_line_test",
+    srcs = ["best_line_test.cpp"],
+    deps = [":best_line", "@gtest//:gtest_main"],
+)
