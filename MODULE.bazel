@@ -1,0 +1,9 @@
+module(
+    name = "best_line_project",
+    version = "1.0",
+)
+
+# Define the dependency on GoogleTest
+bazel_dep(name = "googletest", version = "1.14.0")
+
+# NOTE: needs --enable_bzlmod flag   ex. bazelisk build --enable_bzlmod //:best_line_test

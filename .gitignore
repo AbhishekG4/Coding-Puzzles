@@ -1,10 +1,5 @@
 # Bazel Build directories
 bazel-*
 
-# C++ compiler generated files
-*.o
-*.out
-*.exe
-
 #VSCode settings
 .vscode/
