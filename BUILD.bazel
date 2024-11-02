@@ -2,10 +2,12 @@ cc_library(
     name = "best_line",
     srcs = ["best_line.cpp"],
     hdrs = ["best_line.h"],
+    copts = ["/std:c++20"],
 )
 
 cc_test(
     name = "best_line_test",
     srcs = ["best_line_test.cpp"],
     deps = [":best_line", "@googletest//:gtest_main"],
+    copts = ["/std:c++20"],
 )
