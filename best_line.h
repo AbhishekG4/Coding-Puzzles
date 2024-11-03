@@ -37,9 +37,10 @@
 
 #include <float.h>
 #include <limits.h>
-#include "absl/container/flat_hash_map.h"
+
 #include <vector>
 
+#include "absl/container/flat_hash_map.h"
 
 // Object to represent a point with x,y coordinates
 struct Point {
@@ -63,12 +64,12 @@ class Line {
   Line(double slope, Point point);
   Line(bool isVertical, Point point);
 
-  //getters
-  double getSlope(){return slope;}
-  double getIntercept(){return intercept;}
-  double getX_intercept(){return x_intercept;}
-  bool getIsVertical(){return isVertical;}
-  bool getIsHorizontal(){return isHorizontal;}
+  // getters
+  double getSlope() { return slope; }
+  double getIntercept() { return intercept; }
+  double getX_intercept() { return x_intercept; }
+  bool getIsVertical() { return isVertical; }
+  bool getIsHorizontal() { return isHorizontal; }
 };
 
 // A medium of slope related info between getFrequentSlope and getBestLine

@@ -1,7 +1,8 @@
 #include "best_line.h"
 
 // Additional constructors for the Line class
-Line::Line(double slope, Point point) {  // constructor for point-slope form of line
+Line::Line(double slope,
+           Point point) {  // constructor for point-slope form of line
   Line::slope = slope;
   intercept = point.y - slope * point.x;
   if (slope == 0)
@@ -53,9 +54,7 @@ SlopeInfo GetFrequentSlope(const std::vector<Point> &points, size_t i) {
 }
 
 Line GetBestLine(const std::vector<Point> &points) {
-  SlopeInfo best_slope{.value = 0,
-                       .freq = INT_MIN,
-                       .isVertical = false};
+  SlopeInfo best_slope{.value = 0, .freq = INT_MIN, .isVertical = false};
   int best_idx = -1;
 
   // we iterate through every point and keep track of the most frequent slope
