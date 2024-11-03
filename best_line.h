@@ -53,30 +53,30 @@ struct Point {
 // x_intercept respectively will not be considered.
 class Line {
  private:
-  double slope = 1;
-  double intercept = 0;  // y-intercept
-  double x_intercept = 0;
-  bool isVertical = false;
-  bool isHorizontal = false;
+  double slope_ = 1;
+  double intercept_ = 0;  // y-intercept
+  double x_intercept_ = 0;
+  bool is_vertical_ = false;
+  bool is_horizontal_ = false;
 
  public:
-  Line() : slope(0), intercept(0) {}  // default constructor
+  Line() : slope_(0), intercept_(0) {}  // default constructor
   Line(double slope, Point point);
-  Line(bool isVertical, Point point);
+  Line(bool is_vertical, Point point);
 
   // getters
-  double getSlope() { return slope; }
-  double getIntercept() { return intercept; }
-  double getX_intercept() { return x_intercept; }
-  bool getIsVertical() { return isVertical; }
-  bool getIsHorizontal() { return isHorizontal; }
+  double GetSlope() { return slope_; }
+  double GetIntercept() { return intercept_; }
+  double GetXIntercept() { return x_intercept_; }
+  bool GetIsVertical() { return is_vertical_; }
+  bool GetIsHorizontal() { return is_horizontal_; }
 };
 
 // A medium of slope related info between getFrequentSlope and getBestLine
 struct SlopeInfo {
   double value;
   int freq;
-  bool isVertical;
+  bool is_vertical;
 };
 
 // For a point i, this function returns info about the most frequent slope

@@ -3,17 +3,17 @@
 // Additional constructors for the Line class
 Line::Line(double slope,
            Point point) {  // constructor for point-slope form of line
-  Line::slope = slope;
-  intercept = point.y - slope * point.x;
+  Line::slope_ = slope;
+  intercept_ = point.y - slope * point.x;
   if (slope == 0)
-    isHorizontal = true;
+    is_horizontal_ = true;
   else
-    x_intercept = -1 * intercept / slope;
+    x_intercept_ = -1 * intercept_ / slope;
 }
-Line::Line(bool isVertical, Point point) {  // constructor for vertical lines
-  Line::isVertical = isVertical;
-  slope = DBL_MAX;
-  x_intercept = point.x;
+Line::Line(bool is_vertical, Point point) {  // constructor for vertical lines
+  Line::is_vertical_ = is_vertical;
+  slope_ = DBL_MAX;
+  x_intercept_ = point.x;
 }
 
 SlopeInfo GetFrequentSlope(const std::vector<Point> &points, size_t i) {
@@ -36,7 +36,7 @@ SlopeInfo GetFrequentSlope(const std::vector<Point> &points, size_t i) {
   // Retrieving most frequent line
   double frequent_slope = 0;
   int max_slope_count = INT_MIN;
-  bool isVertical = false;
+  bool is_vertical = false;
   for (auto s : slope_counts) {
     if (max_slope_count < s.second) {
       max_slope_count = s.second;
@@ -45,16 +45,16 @@ SlopeInfo GetFrequentSlope(const std::vector<Point> &points, size_t i) {
   }
   if (vertical_count > max_slope_count) {  // considering vertical lines
     max_slope_count = vertical_count;
-    isVertical = true;
+    is_vertical = true;
   }
 
   return {.value = frequent_slope,
           .freq = max_slope_count,
-          .isVertical = isVertical};
+          .is_vertical = is_vertical};
 }
 
 Line GetBestLine(const std::vector<Point> &points) {
-  SlopeInfo best_slope{.value = 0, .freq = INT_MIN, .isVertical = false};
+  SlopeInfo best_slope{.value = 0, .freq = INT_MIN, .is_vertical = false};
   int best_idx = -1;
 
   // we iterate through every point and keep track of the most frequent slope
@@ -65,12 +65,12 @@ Line GetBestLine(const std::vector<Point> &points) {
     if (point_info.freq > best_slope.freq) {
       best_slope.value = point_info.value;
       best_slope.freq = point_info.freq;
-      best_slope.isVertical = point_info.isVertical;
+      best_slope.is_vertical = point_info.is_vertical;
       best_idx = i;
     }
   }
 
-  if (best_slope.isVertical)
+  if (best_slope.is_vertical)
     return Line(true, points[best_idx]);
   else
     return Line(best_slope.value, points[best_idx]);

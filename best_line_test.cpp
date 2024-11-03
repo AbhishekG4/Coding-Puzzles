@@ -9,11 +9,11 @@ TEST(GetBestLine, RegularLine) {
 
   Line test_line = GetBestLine(pts);
 
-  EXPECT_EQ(test_line.getIntercept(), 5.0);
-  EXPECT_EQ(test_line.getSlope(), -2);
-  EXPECT_EQ(test_line.getX_intercept(), 2.5);
-  EXPECT_FALSE(test_line.getIsHorizontal());
-  EXPECT_FALSE(test_line.getIsVertical());
+  EXPECT_EQ(test_line.GetIntercept(), 5.0);
+  EXPECT_EQ(test_line.GetSlope(), -2);
+  EXPECT_EQ(test_line.GetXIntercept(), 2.5);
+  EXPECT_FALSE(test_line.GetIsHorizontal());
+  EXPECT_FALSE(test_line.GetIsVertical());
 }
 
 TEST(GetBestLine, HorizontalLine) {
@@ -23,10 +23,10 @@ TEST(GetBestLine, HorizontalLine) {
 
   Line test_line = GetBestLine(pts);
 
-  EXPECT_EQ(test_line.getIntercept(), 1);
-  EXPECT_EQ(test_line.getSlope(), 0);
-  EXPECT_TRUE(test_line.getIsHorizontal());
-  EXPECT_FALSE(test_line.getIsVertical());
+  EXPECT_EQ(test_line.GetIntercept(), 1);
+  EXPECT_EQ(test_line.GetSlope(), 0);
+  EXPECT_TRUE(test_line.GetIsHorizontal());
+  EXPECT_FALSE(test_line.GetIsVertical());
 }
 
 TEST(GetBestLine, VerticalLine) {
@@ -36,7 +36,7 @@ TEST(GetBestLine, VerticalLine) {
 
   Line test_line = GetBestLine(pts);
 
-  EXPECT_EQ(test_line.getX_intercept(), 2);
-  EXPECT_FALSE(test_line.getIsHorizontal());
-  EXPECT_TRUE(test_line.getIsVertical());
+  EXPECT_EQ(test_line.GetXIntercept(), 2);
+  EXPECT_FALSE(test_line.GetIsHorizontal());
+  EXPECT_TRUE(test_line.GetIsVertical());
 }
