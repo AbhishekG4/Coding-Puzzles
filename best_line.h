@@ -37,50 +37,52 @@
 
 #include <float.h>
 #include <limits.h>
-
-#include <iostream>
-#include <unordered_map>
+#include "absl/container/flat_hash_map.h"
 #include <vector>
 
-using namespace std;
 
-/*Object to represent a point with x,y coordinates*/
+// Object to represent a point with x,y coordinates
 struct Point {
-  double x;
-  double y;
-
-  Point(double a, double b) : x(a), y(b) {}
+  double x = 0;
+  double y = 0;
 };
 
-/*Class for all info necessary to describe a line.
-NOTE: It is assumed that if line is vertical or horizontal, intercept and
-x_intercept respectively will not be considered.*/
+// Class for all info necessary to describe a line.
+// NOTE: It is assumed that if line is vertical or horizontal, intercept and
+// x_intercept respectively will not be considered.
 class Line {
- public:
-  double slope;
+ private:
+  double slope = 1;
   double intercept = 0;  // y-intercept
   double x_intercept = 0;
   bool isVertical = false;
   bool isHorizontal = false;
 
+ public:
   Line() : slope(0), intercept(0) {}  // default constructor
-  Line(double s, Point point);
-  Line(bool iV, Point point);
+  Line(double slope, Point point);
+  Line(bool isVertical, Point point);
+
+  //getters
+  double getSlope(){return slope;}
+  double getIntercept(){return intercept;}
+  double getX_intercept(){return x_intercept;}
+  bool getIsVertical(){return isVertical;}
+  bool getIsHorizontal(){return isHorizontal;}
 };
 
-/*A medium of slope related info between getFrequentSlope and getBestLine*/
+// A medium of slope related info between getFrequentSlope and getBestLine
 struct SlopeInfo {
-  int freq;
   double value;
+  int freq;
   bool isVertical;
 };
 
-/*For a point i, this function returns info about the most frequent slope
- * passing through that point*/
-SlopeInfo getFrequentSlope(vector<Point> points, int i);
+// For a point i, this function returns info about the most frequent slope
+// passing through that point
+SlopeInfo GetFrequentSlope(const std::vector<Point> &points, int i);
 
-/*This function iterates through every point i and keeps track of the most
- * frequently seen line*/
-Line getBestLine(vector<Point> points);
-
+// This function iterates through every point i and keeps track of the most
+// frequently seen line
+Line GetBestLine(const std::vector<Point> &points);
 #endif

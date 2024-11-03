@@ -2,6 +2,7 @@ cc_library(
     name = "best_line",
     srcs = ["best_line.cpp"],
     hdrs = ["best_line.h"],
+    deps = ["@abseil-cpp//absl/container:flat_hash_map"],
     copts = ["/std:c++20"],
 )
 
