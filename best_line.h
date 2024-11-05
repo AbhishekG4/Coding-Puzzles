@@ -52,24 +52,24 @@ struct Point {
 // NOTE: It is assumed that if line is vertical or horizontal, intercept and
 // x_intercept respectively will not be considered.
 class Line {
+ public:
+  // constructors
+  Line(double slope, Point point);
+  Line(bool is_vertical, Point point);
+
+  // getters
+  double GetSlope() const { return slope_; }
+  double GetIntercept() const { return intercept_; }
+  double GetXIntercept() const { return x_intercept_; }
+  bool GetIsVertical() const { return is_vertical_; }
+  bool GetIsHorizontal() const { return is_horizontal_; }
+
  private:
   double slope_ = 1;
   double intercept_ = 0;  // y-intercept
   double x_intercept_ = 0;
   bool is_vertical_ = false;
   bool is_horizontal_ = false;
-
- public:
-  Line() : slope_(0), intercept_(0) {}  // default constructor
-  Line(double slope, Point point);
-  Line(bool is_vertical, Point point);
-
-  // getters
-  double GetSlope() { return slope_; }
-  double GetIntercept() { return intercept_; }
-  double GetXIntercept() { return x_intercept_; }
-  bool GetIsVertical() { return is_vertical_; }
-  bool GetIsHorizontal() { return is_horizontal_; }
 };
 
 // A medium of slope related info between getFrequentSlope and getBestLine

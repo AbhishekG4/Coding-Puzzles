@@ -1,21 +1,18 @@
 #include <benchmark/benchmark.h>
 
 #include <ctime>
+#include <random>
 
 #include "best_line.h"
 
 // Function to populate a random graph of rational numbers with n points
 std::vector<Point> PopulateRandomGraph(std::vector<Point> &graph, int n) {
-  double lower_bound = -20000;
-  double upper_bound = 2000;
+  std::mt19937 generator(static_cast<unsigned int>(std::time(NULL)));
+  std::uniform_real_distribution<double> distribution(-2000, 2000);
 
-  std::srand(std::time(NULL));
   for (int i = 0; i < n; i++) {
-    double x =
-        lower_bound + (upper_bound - lower_bound) * (std::rand() / RAND_MAX);
-    double y =
-        lower_bound + (upper_bound - lower_bound) * (std::rand() / RAND_MAX);
-
+    double x = distribution(generator);
+    double y = distribution(generator);
     graph.push_back({x, y});
   }
 
@@ -24,14 +21,12 @@ std::vector<Point> PopulateRandomGraph(std::vector<Point> &graph, int n) {
 
 // Function to populate a random graph of integers with n points
 std::vector<Point> PopulateRandomIntGraph(std::vector<Point> &graph, int n) {
-  int lower_bound = -20;
-  int upper_bound = 20;
+  std::mt19937 generator(static_cast<unsigned int>(std::time(NULL)));
+  std::uniform_int_distribution<int> distribution(-20, 20);
 
-  std::srand(std::time(NULL));
   for (int i = 0; i < n; i++) {
-    int x = lower_bound + std::rand() % (upper_bound - lower_bound);
-    int y = lower_bound + std::rand() % (upper_bound - lower_bound);
-
+    int x = distribution(generator);
+    int y = distribution(generator);
     graph.push_back({(double)x, (double)y});
   }
 
