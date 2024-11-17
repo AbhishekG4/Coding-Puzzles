@@ -1,0 +1,5 @@
+# Bazel Build directories
+bazel-*
+
+#VSCode settings
+.vscode/

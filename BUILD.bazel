@@ -1,0 +1,23 @@
+cc_library(
+    name = "best_line",
+    srcs = ["best_line.cpp"],
+    hdrs = ["best_line.h"],
+    deps = ["@abseil-cpp//absl/container:flat_hash_map"],
+    copts = ["/std:c++20"],
+)
+
+cc_test(
+    name = "best_line_test",
+    srcs = ["best_line_test.cpp"],
+    deps = [":best_line", "@googletest//:gtest_main"],
+    copts = ["/std:c++20"],
+)
+
+cc_binary(
+    name = "best_line_benchmark",
+    srcs = ["best_line_benchmark.cpp"],
+    deps = [
+        ":best_line",
+        "@google_benchmark//:benchmark"
+    ],
+)
