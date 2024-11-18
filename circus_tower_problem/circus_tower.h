@@ -27,7 +27,7 @@
 //    O(n^2)*O(n) = O(n^3).
 
 // Time Complexity = O(n^3)
-// Space Complexity = O(n)
+// Space Complexity = O(n^2)
 
 // Possible improvements:
 // 1) Mnemonization can be used in the graph search for better performance
