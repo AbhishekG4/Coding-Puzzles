@@ -38,7 +38,6 @@
 #include <algorithm>
 #include <vector>
 
-
 struct PersonDimensions {
   int height;
   int weight;

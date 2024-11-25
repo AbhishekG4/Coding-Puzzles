@@ -2,7 +2,6 @@
 //  - Tests do not check if calculated elements(calculated tower) actually
 //    belong to the original array or not .
 
-
 #include "circus_tower.h"
 
 #include <gtest/gtest.h>
@@ -45,8 +44,6 @@ TEST(LongestTower, CustomExample) {
       4);
 }
 
-TEST(LongestTower, NilExample){       // contains case where heights are same
-  GenericTest(
-      {{21,33},{24,26},{24,29},{18,36},{26,22},{27,19}},
-      1);
+TEST(LongestTower, NilExample) {  // contains case where heights are same
+  GenericTest({{21, 33}, {24, 26}, {24, 29}, {18, 36}, {26, 22}, {27, 19}}, 1);
 }
