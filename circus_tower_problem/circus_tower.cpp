@@ -64,7 +64,7 @@ std::vector<PersonDimensions> LongestTower(
   std::vector<size_t> longest_path = LongestPathInGraph(adjacency_list);
 
   // Adding people to longest tower
-  for (auto person_idx : longest_path)
+  for (size_t person_idx : longest_path)
     longest_tower.push_back(sorted_dimensions[person_idx]);
 
   return longest_tower;

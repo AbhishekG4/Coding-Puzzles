@@ -18,7 +18,7 @@
 // 1) Sort the array based on the second index of each tupple (wt) [O(nlgn)]
 // 2) For each pair in the sorted array, find all pairs with greater ht that
 //    lie in front of it, thus ht and wt will be greater. Store all such
-//    pairs(pair1->pair2) using a hashmap in the form of an adjacency
+//    pairs(pair1->pair2) in a vector of vectors in the form of an adjacency
 //    list. [O(n^2)]
 // 3) These directional pairs make up a graph where each path is a valid
 //    tower.
