@@ -1,0 +1,23 @@
+cc_library(
+    name = "circus_tower",
+    srcs = ["circus_tower.cpp"],
+    hdrs = ["circus_tower.h"],
+    deps = ["@abseil-cpp//absl/container:flat_hash_map"],
+    copts = ["/std:c++20"],
+)
+
+cc_test(
+    name = "circus_tower_test",
+    srcs = ["circus_tower_test.cpp"],
+    deps = [":circus_tower", "@googletest//:gtest_main"],
+    copts = ["/std:c++20"],
+)
+
+cc_binary(
+    name = "circus_tower_benchmark",
+    srcs = ["circus_tower_benchmark.cpp"],
+    deps = [
+        ":circus_tower",
+        "@google_benchmark//:benchmark"
+    ],
+)
