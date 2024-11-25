@@ -38,7 +38,6 @@
 #include <algorithm>
 #include <vector>
 
-#include "absl/container/flat_hash_map.h"
 
 struct PersonDimensions {
   int height;
