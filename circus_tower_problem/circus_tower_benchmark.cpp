@@ -6,18 +6,16 @@
 
 // Function to populate a random group of n people with integer heights and
 // weights
-std::vector<PersonDimensions> PopulateRandomIntGraph(
-    std::vector<PersonDimensions> &dims, int n) {
+void PopulateRandomIntDims(std::vector<PersonDimensions> &dims, int n) {
   std::random_device rd;
+  std::mt19937 prng(rd());  // Initializing PRNG
   std::uniform_int_distribution<int> distribution(0, 250);
 
   for (int i = 0; i < n; i++) {
-    int ht = distribution(rd);
-    int wt = distribution(rd);
+    int ht = distribution(prng);
+    int wt = distribution(prng);
     dims.push_back({ht, wt});
   }
-
-  return dims;
 }
 
 // Benchmark function
@@ -25,12 +23,10 @@ static void BM_LongestTower(benchmark::State &state) {
   std::vector<PersonDimensions> dims;
   dims.reserve(state.range(0));
 
-  PopulateRandomIntGraph(
-      dims,
-      state.range(0));  // Set being passed by reference to avoid copying
+  PopulateRandomIntDims(dims, state.range(0));
 
   for (auto _ : state) {
-    int longest_tower = LongestTower(dims);
+    std::vector<PersonDimensions> longest_tower = LongestTower(dims);
   }
 }
 

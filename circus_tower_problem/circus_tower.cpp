@@ -1,8 +1,7 @@
 #include "circus_tower.h"
 
-void FillAjacencyList(
-    const std::vector<PersonDimensions> &sorted_dims,
-    absl::flat_hash_map<size_t, std::vector<size_t>> &adjacency_list) {
+void FillAjacencyList(const std::vector<PersonDimensions> &sorted_dims,
+                      std::vector<std::vector<size_t>> &adjacency_list) {
   for (size_t i = 0; i < sorted_dims.size() - 1; i++) {
     for (size_t j = i + 1; j < sorted_dims.size(); j++) {
       if (sorted_dims[i].height <
@@ -14,36 +13,43 @@ void FillAjacencyList(
   }
 }
 
-int DFS(int distance, size_t node,
-        absl::flat_hash_map<size_t, std::vector<size_t>> &adjacency_list) {
-  int max_distance = ++distance;  // base case built in
-  std::vector<size_t> neighbors = adjacency_list[node];
+void DFS(size_t node, const std::vector<std::vector<size_t>> &adjacency_list,
+         std::vector<size_t> ongoing_path, std::vector<size_t> &longest_path) {
+  ongoing_path.push_back(node);
+  const std::vector<size_t> &neighbors = adjacency_list[node];
 
+  // base case
+  if (!neighbors.size()) {
+    if (ongoing_path.size() > longest_path.size()) longest_path = ongoing_path;
+    return;
+  }
+  // recursive case
   for (size_t next_node : neighbors) {
-    max_distance =
-        std::max(max_distance, DFS(distance, next_node, adjacency_list));
+    DFS(next_node, adjacency_list, ongoing_path, longest_path);
   }
 
-  return max_distance;
+  return;
 }
 
-int LongestPathInGraph(
-    absl::flat_hash_map<size_t, std::vector<size_t>> &adjacency_list) {
-  int longest_path = 0;
-  std::vector<size_t> keys;
+std::vector<size_t> LongestPathInGraph(
+    const std::vector<std::vector<size_t>> &adjacency_list) {
+  std::vector<size_t> longest_path;
 
-  for (auto pair : adjacency_list) keys.push_back(pair.first);
-  for (size_t node :
-       keys) {  // going through all nodes and starting a DFS from there
-    longest_path = std::max(longest_path, DFS(0, node, adjacency_list));
+  for (size_t node = 0; node < adjacency_list.size();
+       node++) {  // going through all nodes and starting a DFS from there
+    std::vector<size_t> path;
+    DFS(node, adjacency_list, {}, path);
+    if (path.size() > longest_path.size()) longest_path = path;
   }
 
   return longest_path;
 }
 
-int LongestTower(const std::vector<PersonDimensions> &dimensions) {
+std::vector<PersonDimensions> LongestTower(
+    const std::vector<PersonDimensions> &dimensions) {
   std::vector<PersonDimensions> sorted_dimensions = dimensions;
-  absl::flat_hash_map<size_t, std::vector<size_t>> adjacency_list;
+  std::vector<std::vector<size_t>> adjacency_list(dimensions.size());
+  std::vector<PersonDimensions> longest_tower;
 
   // sorting index arrays
   std::sort(sorted_dimensions.begin(), sorted_dimensions.end(),
@@ -55,5 +61,11 @@ int LongestTower(const std::vector<PersonDimensions> &dimensions) {
   FillAjacencyList(sorted_dimensions, adjacency_list);
 
   // Find longest path in graph
-  return LongestPathInGraph(adjacency_list);
+  std::vector<size_t> longest_path = LongestPathInGraph(adjacency_list);
+
+  // Adding people to longest tower
+  for (auto person_idx : longest_path)
+    longest_tower.push_back(sorted_dimensions[person_idx]);
+
+  return longest_tower;
 }

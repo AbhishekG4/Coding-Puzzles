@@ -19,7 +19,7 @@
 // 2) For each pair in the sorted array, find all pairs with greater ht that
 //    lie in front of it, thus ht and wt will be greater. Store all such
 //    pairs(pair1->pair2) using a hashmap in the form of an adjacency
-//    list. [O(n^3)]
+//    list. [O(n^2)]
 // 3) These directional pairs make up a graph where each path is a valid
 //    tower.
 // 4) We must now find the longest path in the graph which can be done by
@@ -46,21 +46,21 @@ struct PersonDimensions {
 };
 
 // Creates adjacency list from sorted array
-void FillAjacencyList(
-    const std::vector<PersonDimensions> &sorted_dims,
-    absl::flat_hash_map<size_t, std::vector<size_t>> &adjacency_list);
+void FillAjacencyList(const std::vector<PersonDimensions> &sorted_dims,
+                      std::vector<std::vector<size_t>> &adjacency_list);
 
 // Depth-First-Search given a starting node while keepting track of depth
-int DFS(int distance, size_t node,
-        absl::flat_hash_map<size_t, std::vector<size_t>> &adjacency_list);
+void DFS(size_t node, const std::vector<std::vector<size_t>> &adjacency_list,
+         std::vector<size_t> ongoing_path, std::vector<size_t> &longest_path);
 
 // Iterates through all nodes and calls DFS on each one while keeping track of
 // max depth
-int LongestPathInGraph(
-    absl::flat_hash_map<size_t, std::vector<size_t>> &adjacency_list);
+std::vector<size_t> LongestPathInGraph(
+    const std::vector<std::vector<size_t>> &adjacency_list);
 
 // Sorts the array and calls all functions to execute subsequent steps (main
 // function)
-int LongestTower(const std::vector<PersonDimensions> &dimensions);
+std::vector<PersonDimensions> LongestTower(
+    const std::vector<PersonDimensions> &dimensions);
 
 #endif
