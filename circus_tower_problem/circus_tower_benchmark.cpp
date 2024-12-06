@@ -9,7 +9,7 @@
 void PopulateRandomIntDims(std::vector<PersonDimensions> &dims, int n) {
   std::random_device rd;
   std::mt19937 prng(rd());  // Initializing PRNG
-  std::uniform_int_distribution<int> distribution(0, 400);
+  std::uniform_int_distribution<int> distribution(0, 4000);
 
   for (int i = 0; i < n; i++) {
     int ht = distribution(prng);
@@ -32,6 +32,6 @@ static void BM_LongestTower(benchmark::State &state) {
 
 // Benchmarking on different values of n
 BENCHMARK(BM_LongestTower)->DenseRange(2, 20, 2);
-// BENCHMARK(BM_LongestTower)->Args({10});
+// BENCHMARK(BM_LongestTower)->Args({1000000});
 
 BENCHMARK_MAIN();
