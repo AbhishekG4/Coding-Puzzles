@@ -21,7 +21,7 @@ void PopulateRandomGraph(std::vector<Point> &graph, int n) {
 void PopulateRandomIntGraph(std::vector<Point> &graph, int n) {
   std::random_device rd;
   std::mt19937 prng(rd());
-  std::uniform_int_distribution<int> distribution(-20, 20);
+  std::uniform_int_distribution<int> distribution(-2000, 2000);
 
   for (int i = 0; i < n; i++) {
     int x = distribution(prng);

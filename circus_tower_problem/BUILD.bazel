@@ -2,7 +2,6 @@ cc_library(
     name = "circus_tower",
     srcs = ["circus_tower.cpp"],
     hdrs = ["circus_tower.h"],
-    deps = ["@abseil-cpp//absl/container:flat_hash_map"],
     copts = ["/std:c++20"],
 )
 
