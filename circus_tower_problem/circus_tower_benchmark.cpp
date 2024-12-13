@@ -31,7 +31,7 @@ static void BM_LongestTower(benchmark::State &state) {
 }
 
 // Benchmarking on different values of n
-BENCHMARK(BM_LongestTower)->DenseRange(2, 20, 2);
+BENCHMARK(BM_LongestTower)->DenseRange(2, 150, 10);
 // BENCHMARK(BM_LongestTower)->Args({1000000});
 
 BENCHMARK_MAIN();

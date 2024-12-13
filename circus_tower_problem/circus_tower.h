@@ -1,5 +1,5 @@
 // Engineer: Abhishek Gautam
-// Last Updated: 12-05-2024
+// Last Updated: 12-12-2024
 
 // Problem: A circus id designing a tower routine consisting of people standing
 //          atop one another's shoulder. For practical and aesthetic reasions,
@@ -70,5 +70,7 @@ void PatienceSort(const std::vector<PersonDimensions> &dimensions,
 // function)
 std::vector<PersonDimensions> LongestTower(
     const std::vector<PersonDimensions> &dimensions);
+
+std::vector<PersonDimensions> LongestTower2(const std::vector<PersonDimensions> &dimensions);
 
 #endif

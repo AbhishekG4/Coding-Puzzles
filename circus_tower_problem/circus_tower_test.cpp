@@ -9,10 +9,10 @@
 #include <iostream>
 
 void GenericTest(const std::vector<PersonDimensions> &dimensions,
-                 int length_expected) {
+                 size_t length_expected) {
   std::vector<PersonDimensions> longest_tower_calculated =
       LongestTower(dimensions);
-  int length_calculated = (int)longest_tower_calculated.size();
+  size_t length_calculated = longest_tower_calculated.size();
 
   // Logging tower found
   std::cout << "Tower: ";
