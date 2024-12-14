@@ -11,7 +11,7 @@
 void GenericTest(const std::vector<PersonDimensions> &dimensions,
                  size_t length_expected) {
   std::vector<PersonDimensions> longest_tower_calculated =
-      LongestTower(dimensions);
+      LongestTower2(dimensions);
   size_t length_calculated = longest_tower_calculated.size();
 
   // Logging tower found
@@ -33,17 +33,17 @@ void GenericTest(const std::vector<PersonDimensions> &dimensions,
   EXPECT_EQ(length_calculated, length_expected);
 }
 
-TEST(LongestTower, QuestionExample) {
+TEST(LongestTower2, QuestionExample) {
   GenericTest({{65, 100}, {70, 150}, {56, 90}, {75, 190}, {60, 95}, {68, 110}},
               6);
 }
 
-TEST(LongestTower, CustomExample) {
+TEST(LongestTower2, CustomExample) {
   GenericTest(
       {{52, 85}, {100, 90}, {85, 91}, {30, 51}, {46, 67}, {116, 72}, {110, 89}},
       4);
 }
 
-TEST(LongestTower, NilExample) {  // contains case where heights are same
+TEST(LongestTower2, NilExample) {  // contains case where heights are same
   GenericTest({{21, 33}, {24, 26}, {24, 29}, {18, 36}, {26, 22}, {27, 19}}, 1);
 }

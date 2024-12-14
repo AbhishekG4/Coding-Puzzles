@@ -88,47 +88,60 @@ std::vector<PersonDimensions> LongestTower(
   return longest_tower;
 }
 
-std::vector<PersonDimensions> LongestTower2(const std::vector<PersonDimensions> &dimensions){
+std::vector<PersonDimensions> LongestTower2(
+    const std::vector<PersonDimensions> &dimensions) {
   std::vector<PersonDimensions> sorted_dimensions = dimensions;
-  std::vector<size_t> longest_seq_ends{sorted_dimensions.size(),1};  //includes initialization (dp array)
-  std::vector<size_t> prev_person{sorted_dimensions.size(),0};       //to keep a connection to previous members of the sequence
   std::vector<PersonDimensions> longest_tower;
+  std::vector<size_t> longest_seq_ends(
+      sorted_dimensions.size(), 1);  // includes initialization (dp array)
+  std::vector<size_t> prev_person(
+      sorted_dimensions.size(),
+      0);  // to keep a connection to previous members of the sequence
 
-  //sort on weight
-  std::sort(sorted_dimensions.begin(),sorted_dimensions.end(), [](const PersonDimensions &x ,const PersonDimensions &y){
-    return x.weight>y.weight;
-  });
+  // sort on weight
+  std::sort(sorted_dimensions.begin(), sorted_dimensions.end(),
+            [](const PersonDimensions &x, const PersonDimensions &y) {
+              return x.weight > y.weight;
+            });
 
-  //filling longest sequence ends
-  for(size_t i=1;i<sorted_dimensions.size();i++){
+  // filling longest sequence ends
+  for (size_t i = 1; i < sorted_dimensions.size(); i++) {
     size_t max = 0;
     size_t prev = 0;
-    for(size_t j=0;j<i;j++){
-      if(sorted_dimensions[j].height<=sorted_dimensions[i].height || sorted_dimensions[j].weight<=sorted_dimensions[i].weight) continue;  //filtering out invalid candidates (for the last pair of the longest sequence ending at i)
-      if(longest_seq_ends[j]>max){
+    for (size_t j = 0; j < i; j++) {
+      if (sorted_dimensions[j].height <= sorted_dimensions[i].height ||
+          sorted_dimensions[j].weight <= sorted_dimensions[i].weight)
+        continue;  // filtering out invalid candidates (candidates ending a
+                   // seqence i can not extend)
+      if (longest_seq_ends[j] > max) {
         max = longest_seq_ends[j];
         prev = j;
       }
     }
     longest_seq_ends[i] = max + 1;
-    prev_person[i] = prev;
+    prev_person[i] = prev;  // maintains a connection from i to the previous
+                            // element in its sequence.
   }
 
-  //finding element/person that ends the longest sequence by simply finding max element of longest_seq_ends
-  size_t max_len = 0;
+  // finding element/person that ends the longest sequence by simply finding max
+  // element of longest_seq_ends
+  size_t max_tower_len = 0;
   size_t smallest_person = 0;
-  for(size_t i=0;i<longest_seq_ends.size();i++){
-    if(longest_seq_ends[i]>max_len){
-      max_len = longest_seq_ends[i];
+  for (size_t i = 0; i < longest_seq_ends.size(); i++) {
+    if (longest_seq_ends[i] > max_tower_len) {
+      max_tower_len = longest_seq_ends[i];
       smallest_person = i;
     }
   }
 
-  //Creating longest tower by adding smallest person and following chain given by the prev_person array
-  longest_tower.push_back(sorted_dimensions[smallest_person]);
-  for(size_t i=0;i<longest_seq_ends[smallest_person]-1;i++){
-    smallest_person = prev_person[smallest_person];             //smallest_person behaves as the smallest person of the remaining array or next smallest person
+  // Creating longest tower by adding smallest person and following chain given
+  // by the prev_person array
+  for (size_t i = 0; i < max_tower_len; i++) {
     longest_tower.push_back(sorted_dimensions[smallest_person]);
+    smallest_person =
+        prev_person[smallest_person];  // smallest_person behaves as the
+                                       // smallest person of the remaining array
+                                       // or next smallest person
   }
 
   return longest_tower;

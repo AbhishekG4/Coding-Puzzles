@@ -1,5 +1,5 @@
 // Engineer: Abhishek Gautam
-// Last Updated: 12-12-2024
+// Last Updated: 12-13-2024
 
 // Problem: A circus id designing a tower routine consisting of people standing
 //          atop one another's shoulder. For practical and aesthetic reasions,
@@ -15,7 +15,7 @@
 //          ["Circus Tower" from Cracking the Coding Interview]
 
 // Approach:
-// 1) Sort the array based on the second index of each tupple (wt) [O(nlgn)]
+// 1) Sort the array based on the second index of each tuple (wt) [O(nlgn)]
 // 2) We will now do a patience sort on the first index of each tupple (ht) [O(nlgn)]
 //    2.1) we initialize a (to be) sorted array of indices A and an array of
 //         previous indices P.
@@ -39,9 +39,29 @@
 //    A, call the index l. The next element in the subsequence can be found by
 //    the height at index P[l] and so on. This gives us the LIS in decending
 //    order which we reverse. [O(n)]
+// Inadequecies:
+// - Does not guarantee the problem's requirement of weight being strictly
+//   decreasing. It could be modified to do so but that would make it more
+//   complex.
 
-// Time Complexity = O(nlgn)
-// Space Complexity = O(n)
+// Approach 2 (dynamic programming) [O(n^2)]:
+// 1) sort the array based on the second index of each tuple (wt) in descending
+//    order, let this array be A. We want to find the Longest decreasing
+//    subsequence(LDS) on height(ht) in this case. [O(nlgn)]
+// 2) initialize a dp array of the same length as A with first element 1
+//    2.1) dp[i] represents the length of the LDS ending at index i in A.
+// 3) for each element A[i], check all previous elements A[j], j<i. [O(n^2)]
+//    3.1) when comparing heights, if A[j]<A[i], then i can extend the LDS
+//         ending at j.
+//    3.2) If this condition is met then dp[i] = max(dp[i],dp[j]+1).
+// 4) to get the length of the overall LDS we find the maximum in array dp.
+// 5) to get the particular LDS we maintain a previous element array which we
+//    update at step 3.2 to maintain a connection between i and j. This is the
+//    same as in approach 1. We can reconstruct the LDS by getting subsequent
+//    elements by looking up indexes in this array. [O(n)]
+
+// Time Complexity (approach 1) = O(nlgn)
+// Space Complexity (both) = O(n)
 
 #ifndef CIRCUS_TOWER_H
 #define CIRCUS_TOWER_H
@@ -71,6 +91,8 @@ void PatienceSort(const std::vector<PersonDimensions> &dimensions,
 std::vector<PersonDimensions> LongestTower(
     const std::vector<PersonDimensions> &dimensions);
 
-std::vector<PersonDimensions> LongestTower2(const std::vector<PersonDimensions> &dimensions);
+// Dynamic programming approach to finding longest tower
+std::vector<PersonDimensions> LongestTower2(
+    const std::vector<PersonDimensions> &dimensions);
 
 #endif
