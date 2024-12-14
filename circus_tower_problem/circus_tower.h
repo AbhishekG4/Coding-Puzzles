@@ -1,5 +1,5 @@
 // Engineer: Abhishek Gautam
-// Last Updated: 12-13-2024
+// Last Updated: 12-14-2024
 
 // Problem: A circus id designing a tower routine consisting of people standing
 //          atop one another's shoulder. For practical and aesthetic reasions,
@@ -15,30 +15,30 @@
 //          ["Circus Tower" from Cracking the Coding Interview]
 
 // Approach:
-// 1) Sort the array based on the second index of each tuple (wt) [O(nlgn)]
+// 1) Sort the array based on the second index of each tuple(wt) in descending
+//    order. [O(nlgn)]
 // 2) We will now do a patience sort on the first index of each tupple (ht) [O(nlgn)]
 //    2.1) we initialize a (to be) sorted array of indices A and an array of
 //         previous indices P.
-//    2.2) we then iterate through the heights. If a height is greater than the
+//    2.2) we then iterate through the heights. If a height is less than the
 //         corresponding height of the last element of A, we append its index to
 //         A.
 //    2.3) If not, then we replace the index of the first element in A where the
-//         the corresponding height is >= search height with the index of the
+//         the corresponding height is <= search height with the index of the
 //         search height, starting from the left. Insertion into A is done using
 //         binary search. In other words we find the samllest i such that A[i]
-//         >= search height.
+//         <= search height.
 //    2.4) Each time we insert index j into A, we assign the previous index in A
-//         to P[j]. This keeps a connection of every height to a lower height
+//         to P[j]. This keeps a connection of every height to a greater height
 //         that definitely comes before it in the main array.
-//    2.5) A maintains the indices of the smallest heights(A[i]) that culminate
-//         a LIS of length i+1 where i is the index in A given the array seen so
+//    2.5) A maintains the indices of the largest heights(A[i]) that culminate
+//         a LDS of length i+1 where i is the index in A given the array seen so
 //         far.
 // 3) The size of A at the end gives the size of the largest increasing
 //    subsequence (LIS).
 // 4) To find a LIS, we start from the height corresponding to the last index in
 //    A, call the index l. The next element in the subsequence can be found by
-//    the height at index P[l] and so on. This gives us the LIS in decending
-//    order which we reverse. [O(n)]
+//    the height at index P[l] and so on. This gives us the LIS [O(n)]
 // Inadequecies:
 // - Does not guarantee the problem's requirement of weight being strictly
 //   decreasing. It could be modified to do so but that would make it more

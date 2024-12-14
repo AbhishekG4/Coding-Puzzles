@@ -5,10 +5,21 @@ cc_library(
     copts = ["/std:c++20"],
 )
 
+cc_library(
+    name = "utils",
+    srcs = ["utils.cpp"],
+    hdrs = ["utils.h"],
+    deps = [":circus_tower"],
+    copts = ["/std:c++20"],
+)
+
 cc_test(
     name = "circus_tower_test",
     srcs = ["circus_tower_test.cpp"],
-    deps = [":circus_tower", "@googletest//:gtest_main"],
+    deps = [":circus_tower",
+            ":utils",
+            "@googletest//:gtest_main",
+            ],
     copts = ["/std:c++20"],
 )
 
@@ -17,6 +28,7 @@ cc_binary(
     srcs = ["circus_tower_benchmark.cpp"],
     deps = [
         ":circus_tower",
+        ":utils",
         "@google_benchmark//:benchmark"
     ],
 )
