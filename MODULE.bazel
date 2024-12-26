@@ -10,3 +10,5 @@ bazel_dep(name = "google_benchmark", version = "1.8.3")
 
 # NOTE: needs --enable_bzlmod flag   ex. bazelisk build --enable_bzlmod //:best_line_test
 # NOTE: commands 'run' and 'test' are done the exact same way as build
+# NOTE: When in subdir run as follows ex. bazelisk build --enable_bzlmod :best_line_test
+# NOTE: other flags to add at the end: --verbose_failures, --test_arg=verbose

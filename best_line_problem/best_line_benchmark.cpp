@@ -5,31 +5,29 @@
 #include "best_line.h"
 
 // Function to populate a random graph of rational numbers with n points
-std::vector<Point> PopulateRandomGraph(std::vector<Point> &graph, int n) {
+void PopulateRandomGraph(std::vector<Point> &graph, int n) {
   std::random_device rd;
+  std::mt19937 prng(rd());
   std::uniform_real_distribution<double> distribution(-2000, 2000);
 
   for (int i = 0; i < n; i++) {
-    double x = distribution(rd);
-    double y = distribution(rd);
+    double x = distribution(prng);
+    double y = distribution(prng);
     graph.push_back({x, y});
   }
-
-  return graph;
 }
 
 // Function to populate a random graph of integers with n points
-std::vector<Point> PopulateRandomIntGraph(std::vector<Point> &graph, int n) {
+void PopulateRandomIntGraph(std::vector<Point> &graph, int n) {
   std::random_device rd;
-  std::uniform_int_distribution<int> distribution(-20, 20);
+  std::mt19937 prng(rd());
+  std::uniform_int_distribution<int> distribution(-2000, 2000);
 
   for (int i = 0; i < n; i++) {
-    int x = distribution(rd);
-    int y = distribution(rd);
+    int x = distribution(prng);
+    int y = distribution(prng);
     graph.push_back({(double)x, (double)y});
   }
-
-  return graph;
 }
 
 // Benchmark function
