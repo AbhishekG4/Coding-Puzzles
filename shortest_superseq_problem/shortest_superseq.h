@@ -1,5 +1,5 @@
 // Engineer: Abhishek Gautam
-// Last Updated: 12-25-2024
+// Last Updated: 01-04-2025
 
 // Problem: You are given two arrays, one shorter (with all distinct elements)
 //          and one longer. Find the shortest subarray in the longer array
@@ -13,7 +13,7 @@
 // 1) Add all elements of the shorter array into a hashset. [O(m) where m<n]
 // 2) Using a sliding window keep track of the smallest valid subarray. [O(n)]
 //     2.1) We start with an empty window at the begining of the long array
-//          and an empty hashset to keep track of distinct elements of the 
+//          and an empty hashset to keep track of distinct elements of the
 //          shorter array present in the window.
 //     2.2) Expand the window from the right if the size of its hashset is
 //          less than the size of the shorter array.
@@ -28,13 +28,12 @@
 
 #include "absl/container/flat_hash_set.h"
 
-
-struct SubArray{
-    int start;
-    int end;
+struct SubArray {
+  size_t start;
+  size_t end;
 };
 
-SubArray ShortestSuperseq(const std::vector<int> &in_short, const std::vector<int> &in_long);
-
+SubArray ShortestSuperseq(const std::vector<int> &in_short,
+                          const std::vector<int> &in_long);
 
 #endif
