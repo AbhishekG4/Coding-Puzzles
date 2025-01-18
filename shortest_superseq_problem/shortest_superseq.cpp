@@ -2,13 +2,12 @@
 
 SubArray ShortestSuperseq(const std::vector<int> &short_array,
                           const std::vector<int> &long_array) {
-  absl::flat_hash_set<int> search_seq;  // search elements
-  size_t nxt_out = 0;                   // start of window
-  size_t nxt_in = 0;                    // next of end of window
+  absl::flat_hash_set<int> search_seq(short_array.begin(),
+                                      short_array.end());  // search elements
+  size_t nxt_out = 0;                                      // start of window
+  size_t nxt_in = 0;  // next of end of window
   size_t min_start = 0;
   size_t min_end = long_array.size();
-
-  for (int i : short_array) search_seq.insert(i);
 
   absl::flat_hash_set<int>
       window_ele;  // hash set for search elements present in window

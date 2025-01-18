@@ -19,21 +19,22 @@
 //          less than the size of the shorter array.
 //     2.3) Othrewise we update global record of the smallest window and
 //          shrink window from the left.
-// 3) Return the global minumum window.
+// 3) Return the global minimum window.
 
 // ====================================================================================
 
-#ifndef SHORTEST_SUPERSEQ_H
-#define SHORTEST_SEUPERSEQ_H
+#pragma once
 
 #include "absl/container/flat_hash_set.h"
 
 struct SubArray {
   size_t start;
   size_t end;
+
+  bool operator==(const SubArray &other) const {
+    return start == other.start && end == other.end;
+  }
 };
 
 SubArray ShortestSuperseq(const std::vector<int> &in_short,
                           const std::vector<int> &in_long);
-
-#endif
